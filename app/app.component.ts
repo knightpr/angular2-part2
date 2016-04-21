@@ -1,24 +1,14 @@
 import {Component} from 'angular2/core';
+import {Item} from './item';
+import {ItemDetailComponent} from './item-detail.component';
+import {MainMenuComponent} from './main-menu.component';
+import {FooterComponent} from './footer.component';
 
-export class Item {
-  id: number;
-  name: string;
-}
-var ITEMS: Item[] =[
-	{id: 1,name: 'PHP'},
-	{id: 2,name: 'C++'},
-	{id: 3,name: 'c#'},
-	{id: 4,name: 'Angular 1'},
-	{id: 5,name: 'Angular 2'},
-	{id: 6,name: 'Bootstrap'},
-	{id: 7,name: 'Lisp'},
-	{id: 8,name: 'VB6'},
-
-];
 
 @Component({
     selector: 'my-app',
-    template: `<h1>Welcome to {{title}}, {{location}}</h1>
+    template: `<main-menu-detail></main-menu-detail>
+    			<h1>Welcome to {{title}}</h1>
     			
     			 <h2>Courses offered</h2>
 				<ul class="items">
@@ -29,13 +19,8 @@ var ITEMS: Item[] =[
 				      <span class="badge">{{item.id}}</span>  {{item.name}}
 				  </li>
 				</ul>
-				<div  *ngIf="selectedItem">
-				<h2>{{selectedItem.name}} details!</h2>
-				<div><label>id: </label>{{selectedItem.id}}</div>
-				
-				    <label>name: </label>
-				    <input [(ngModel)]="selectedItem.name" placeholder="name"/>
-				</div>
+				<my-item-detail [item]="selectedItem"></my-item-detail>
+				<footer-detail></footer-detail>
 
     		  `,
     styles:[`
@@ -53,11 +38,12 @@ var ITEMS: Item[] =[
 			    cursor: pointer;
 			    position: relative;
 			    left: 0;
-			    background-color: #EEE;
+			    background-color: #3E8BC3;
 			    margin: .5em;
 			    padding: .3em 0;
 			    height: 1.6em;
 			    border-radius: 0px;
+			    color: #fff;
 			  }
 			  .items li.selected:hover {
 			    background-color: #BBD8DC !important;
@@ -86,7 +72,9 @@ var ITEMS: Item[] =[
 			    margin-right: .8em;
 			    border-radius: 4px 0 0 4px;
 			  }
-			`]		  
+			`],
+			directives: [ItemDetailComponent,FooterComponent,MainMenuComponent]
+
 })
 export class AppComponent {
 	title = 'Programming Tech';
@@ -98,4 +86,15 @@ export class AppComponent {
 	
 	
  }
+ var ITEMS: Item[] =[
+	{id: 1,name: 'PHP'},
+	{id: 2,name: 'C++'},
+	{id: 3,name: 'c#'},
+	{id: 4,name: 'Angular 1'},
+	{id: 5,name: 'Angular 2'},
+	{id: 6,name: 'Bootstrap'},
+	{id: 7,name: 'Lisp'},
+	{id: 8,name: 'VB6'},
+
+];
 
